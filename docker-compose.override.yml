@@ -79,6 +79,7 @@ services:
         target: C:\data
     environment:
       SOLR_MODE: solrcloud
+      SOLR_LOG_LEVEL: WARN
     healthcheck:
       test:
         [
