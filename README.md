@@ -24,7 +24,7 @@ We also want to show how to do integrations in Sitecore using webhooks, keeping 
 
 ### What problem was solved
 
-Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain needed information such as *field value changes*.
+Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain much needed information such as *field value changes*.
 
 ### How does this module solve it
 
