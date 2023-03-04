@@ -93,7 +93,7 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
 // function to fetch data from the glitter API
 async function fetchApiData(itemId, itemLanguage, itemVersion) {
     let cleaneditemId = itemId.replace("{", "").replace("}", "");
-    let url = "https://glitterbucket.localhost/item/" + cleaneditemId + "/version/" + itemVersion;
+    let url = "https://glitterbucket.localhost/item/" + cleaneditemId + "/" + itemLanguage + "/version/" + itemVersion;
     alert(url);
     let response = await fetch(url);
     let historydata = await response.json();
