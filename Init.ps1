@@ -14,7 +14,7 @@ Param (
     [Parameter(Mandatory = $true,
         HelpMessage = "Sets the sitecore\\admin password for this environment via environment variable.",
         ParameterSetName = "env-init")]
-    [string]$AdminPassword
+    [string]$AdminPassword = "b"
 )
 
 $ErrorActionPreference = "Stop";
@@ -77,7 +77,7 @@ try {
     }
     Write-Host "Generating Traefik TLS certificate..." -ForegroundColor Green
     & $mkcert -install
-    & $mkcert "glitteraudit.localhost"
+    & $mkcert "xmcloudcm.localhost"
 
     # stash CAROOT path for messaging at the end of the script
     $caRoot = "$(& $mkcert -CAROOT)\rootCA.pem"
@@ -96,7 +96,7 @@ finally {
 
 Write-Host "Adding Windows hosts file entries..." -ForegroundColor Green
 
-Add-HostsEntry "glitteraudit.localhost"
+Add-HostsEntry "xmcloudcm.localhost"
 
 ###############################
 # Generate scjssconfig
@@ -129,7 +129,7 @@ if ($InitEnv) {
     Set-EnvFileVariable "HOST_LICENSE_FOLDER" -Value $LicenseXmlPath
 
     # CM_HOST
-    Set-EnvFileVariable "CM_HOST" -Value "glitteraudit.localhost"
+    Set-EnvFileVariable "CM_HOST" -Value "xmcloudcm.localhost"
 
     # TELERIK_ENCRYPTION_KEY = random 64-128 chars
     Set-EnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)

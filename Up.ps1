@@ -109,5 +109,5 @@ dotnet sitecore ser push
 if ($ClientCredentialsLogin -ne "true") {
     Write-Host "Opening site..." -ForegroundColor Green
 
-    Start-Process https://glitteraudit.localhost/sitecore/
+    Start-Process https://xmcloudcm.localhost/sitecore/
 }
