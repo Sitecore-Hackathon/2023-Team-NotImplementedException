@@ -78,6 +78,8 @@ try {
     Write-Host "Generating Traefik TLS certificate..." -ForegroundColor Green
     & $mkcert -install
     & $mkcert "xmcloudcm.localhost"
+    & $mkcert "glitterbucket.localhost"
+    & $mkcert "grafana.localhost"
 
     # stash CAROOT path for messaging at the end of the script
     $caRoot = "$(& $mkcert -CAROOT)\rootCA.pem"

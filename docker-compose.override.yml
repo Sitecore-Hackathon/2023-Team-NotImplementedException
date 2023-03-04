@@ -153,13 +153,14 @@ services:
 
   grafana:
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
-      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
-      - "traefik.http.routers.cm-secure.entrypoints=websecure"
-      - "traefik.http.routers.cm-secure.rule=Host(`${GRAFANA_HOST}`)"
-      - "traefik.http.routers.cm-secure.tls=true"
-      - "traefik.http.routers.cm-secure.middlewares=force-STS-Header"
+      - traefik.enable=true"
+      - traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+      - traefik.http.routers.grafana-secure.entrypoints=websecure"
+      - traefik.http.routers.grafana-secure.rule=Host(`${GRAFANA_HOST}`)"
+      - traefik.http.routers.grafana-secure.tls=true"
+      - traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
 
   glitterbucket:
     environment:
@@ -168,7 +169,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
       - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
-      - "traefik.http.routers.cm-secure.entrypoints=websecure"
-      - "traefik.http.routers.cm-secure.rule=Host(`${GLITTERBUCKET_HOST}`)"
-      - "traefik.http.routers.cm-secure.tls=true"
-      - "traefik.http.routers.cm-secure.middlewares=force-STS-Header"
+      - "traefik.http.routers.glitterbucket-secure.entrypoints=websecure"
+      - "traefik.http.routers.glitterbucket-secure.rule=Host(`${GLITTERBUCKET_HOST}`)"
+      - "traefik.http.routers.glitterbucket-secure.tls=true"
+      - "traefik.http.routers.glitterbucket-secure.middlewares=force-STS-Header"

@@ -13,6 +13,7 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Move-Item grafana* grafana ; \
     Remove-Item /grafana/conf/provisioning/dashboards/* ; 
 
-# COPY custom.ini /grafana/conf/
+COPY custom.ini /grafana/conf/
+COPY provisioning/datasources/* /grafana/provisioning/datasources
 
 ENTRYPOINT "c:\grafana\bin\grafana-server.exe" --homepath=c:\\grafana --packaging=docker

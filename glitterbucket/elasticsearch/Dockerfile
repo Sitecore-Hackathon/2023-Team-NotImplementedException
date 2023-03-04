@@ -31,11 +31,11 @@ WORKDIR $ES_HOME
 COPY --from=installer C:\elasticsearch\ .
 COPY elasticsearch.yml c:\elasticsearch\config\
 
-HEALTHCHECK --interval=5s `
-    CMD powershell -command `
-    try { `
-    $content = (iwr -useb http://localhost:9200/_cat/health).Content; `
-    $health = $content.Split(' ')[3]; `
-    if ($health -eq 'green' -or $health -eq 'yellow') { return 0 } `
-    else { return 1 }; `
-    } catch { return 1 }
+#HEALTHCHECK --interval=5s `
+#    CMD powershell -command `
+#    try { `
+#    $content = (iwr -useb http://localhost:9200/_cat/health).Content; `
+#    $health = $content.Split(' ')[3]; `
+#    if ($health -eq 'green' -or $health -eq 'yellow') { return 0 } `
+#    else { return 1 }; `
+#    } catch { return 1 }

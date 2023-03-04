@@ -2,3 +2,7 @@ tls:
   certificates:
     - certFile: C:\etc\traefik\certs\xmcloudcm.localhost.pem
       keyFile: C:\etc\traefik\certs\xmcloudcm.localhost-key.pem
+    - certFile: C:\etc\traefik\certs\grafana.localhost.pem
+      keyFile: C:\etc\traefik\certs\grafana.localhost-key.pem
+    - certFile: C:\etc\traefik\certs\glitterbucket.localhost.pem
+      keyFile: C:\etc\traefik\certs\glitterbucket.localhost-key.pem
