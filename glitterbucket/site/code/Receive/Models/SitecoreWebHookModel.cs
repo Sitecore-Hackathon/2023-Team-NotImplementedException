@@ -4,9 +4,9 @@
     {
         public string EventName { get; set; }
 
-        public ItemModel Item { get; set; }
+        public ItemModel? Item { get; set; }
 
-        public ItemChanges Changes { get; set; }
+        public ItemChanges? Changes { get; set; }
 
     }
 
@@ -24,11 +24,11 @@
 
         public Guid TemplateId { get; set; }
 
-        public ICollection<FieldDate> SharedFields { get; set; }
+        public ICollection<FieldDate>? SharedFields { get; set; }
 
-        public ICollection<FieldDate> UnversionedFields { get; set; }
+        public ICollection<FieldDate>? UnversionedFields { get; set; }
         
-        public ICollection<FieldDate> VersionedFields { get; set; }
+        public ICollection<FieldDate>? VersionedFields { get; set; }
 
     }
 

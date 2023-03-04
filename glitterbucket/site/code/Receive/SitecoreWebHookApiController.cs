@@ -23,13 +23,15 @@ namespace GlitterBucket.Receive
             var raw = await reader.ReadToEndAsync();
             var now = DateTime.UtcNow;
 
-            using var stdOut = Console.OpenStandardOutput();
-            await JsonSerializer.SerializeAsync(stdOut, raw);
+            await using (var stdOut = Console.OpenStandardOutput())
+            {
+                await JsonSerializer.SerializeAsync(stdOut, raw);
+            }
 
             using var stream = new MemoryStream(Encoding.UTF8.GetBytes(raw));
             var model = await JsonSerializer.DeserializeAsync<SitecoreWebHookModel>(stream);
 
-            var indexName = $"glitteraudit";
+            var indexName = $"glitteraudit-{now:yyyy-MM}";
             await _client.Indices.CreateAsync(indexName, s => s
                 .Settings(se => se
                 .NumberOfReplicas(1)
@@ -39,11 +41,12 @@ namespace GlitterBucket.Receive
             var fields = new IndexChangeModel
             {
                 Timestamp = now,
-                Raw = model,
+                Raw = raw,
                 ItemId = model?.Item?.Id ?? Guid.Empty,
+                Version = model?.Item?.Version ?? 0,
                 ParentId = model?.Item?.ParentId ?? Guid.Empty,
                 SitecoreInstance = id,
-                FieldIds = fieldIds
+                FieldIds = fieldIds,
             };
             await _client.CreateAsync(fields, opt => opt.Index(indexName).Id(Guid.NewGuid()));
 
