@@ -1,0 +1,38 @@
+services:
+
+  traefik:
+    volumes:
+      - ./docker/traefik:C:/etc/traefik
+
+  mssql:
+    volumes:
+      - type: bind
+        source: .\docker\data\sql
+        target: c:\data
+
+  solr:
+    volumes:
+      - type: bind
+        source: .\docker\data\solr
+        target: c:\data
+
+  cm:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xmcloud-cm:${VERSION:-latest}
+    build:
+      context: ./docker/build/cm
+      args:
+        PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
+        TOOLS_IMAGE: ${TOOLS_IMAGE}
+    volumes:
+      - ${LOCAL_DEPLOY_PATH}\platform:C:\deploy
+      - ${LOCAL_DATA_PATH}\cm:C:\inetpub\wwwroot\App_Data\logs
+      - ${HOST_LICENSE_FOLDER}:c:\license
+    environment:
+      SITECORE_LICENSE_LOCATION: c:\license\license.xml
+      JSS_DEPLOYMENT_SECRET_xmcloudpreview: ${JSS_DEPLOYMENT_SECRET_xmcloudpreview}
+      SITECORE_JSS_EDITING_SECRET: ${JSS_EDITING_SECRET}
+      SITECORE_Pages_Client_Host: ${SITECORE_Pages_Client_Host}
+      SITECORE_Pages_CORS_Allowed_Origins: ${SITECORE_Pages_CORS_Allowed_Origins}
+      SITECORE_DEVELOPMENT_PATCHES: DevEnvOn,CustomErrorsOff,DebugOn,DiagnosticsOff,InitMessagesOff
+      Sitecore_AppSettings_exmEnabled:define: "no"
+    entrypoint: powershell -Command "& C:/tools/entrypoints/iis/Development.ps1"
