@@ -4,8 +4,8 @@
 .vs
 .config
 .sitecore
-glitterxmc/docker/
-glitterxmc/packages/
+docker/
+packages/
 **/bin/
 **/obj/
 **/out/

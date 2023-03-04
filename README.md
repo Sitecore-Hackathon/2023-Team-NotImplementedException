@@ -14,19 +14,21 @@ Best Enhancement to XM Cloud
 
 ## Description
 
-Glitter Audit
+**Glitter Audit**, your goto XM Cloud tool for everything content auditing!
 
 ### Module Purpose
 
-**... TODO ...**
+Collects information on item, version and field changes to surface basic audit and historic information for Sitecore users *in context* of their current editor (ie. Content Editor, Experience Editor or Pages) using a browser extension. All data is stored in Elasticsearch and can be further queried and analyzed in great details.
 
 ### What problem was solved
 
-**... TODO ...**
+Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain needed information such as *field value changes*.
 
 ### How does this module solve it
 
-**... TODO ...**
+A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore.com/xp/en/developers/103/sitecore-experience-manager/webhooks.html) is configured to trigger on all events [available](https://doc.sitecore.com/xp/en/developers/103/sitecore-experience-manager/webhook-event-handler-configuration-fields.html#supported-events) and posts event data to our web app "glitterbucket" that persists the data in Elasticsearch. The "glitterbucket" web app also exposes data endpoints for the browser extension "glitterchromiumextension" to show the UI. Developers/administrators can also use Kibana to query the data directly.
+
+![Solution overview](docs/images/overview.png?raw=true "Solution overview")
 
 ## Video link
 
@@ -49,7 +51,7 @@ Glitter Audit
 
 ### Startup
 
-1. Run `docker compose up -d --build`
+1. Run `docker-compose up -d --build`
 1. Run `dotnet sitecore index schema-populate`
 1. Run `dotnet sitecore ser push`
 1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore webhooks *only* initializes during startup OR item:save on a handler but NOT when pushing serialized items... \*sigh\*)
@@ -57,7 +59,7 @@ Glitter Audit
 
 ### Shutdown
 
-1. Run `docker compose down`
+1. Run `docker-compose down`
 
 ### Configuration
 
