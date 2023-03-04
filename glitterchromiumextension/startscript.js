@@ -85,17 +85,58 @@ chrome.tabs.query({
 // update the extension gui with item information + glitter data
 async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
     var historyElement = document.getElementById("history");
-    var apiData = await fetchApiData(itemId, itemLanguage, itemVersion);
-    historyElement.innerHTML = "ItemId: " + itemId + "<br/>Language: " + itemLanguage + "<br/>" + "<br/>Version: " + itemVersion + "<br/>" + apiData;
+    let cleaneditemId = itemId.replace("{", "").replace("}", "");
+    var apiData = await fetchApiData(cleaneditemId, itemLanguage, itemVersion);
+
+    var historyItemTableElement = document.createElement("table");
+    
+    // render item data
+    renderItemData(historyItemTableElement, "Item id", cleaneditemId);
+    renderItemData(historyItemTableElement, "Item version", itemVersion);
+    renderItemData(historyItemTableElement, "Item language", itemLanguage);
+
+    historyElement.appendChild(historyItemTableElement);
+
+    apiData.forEach(historyEntry => {
+        var historyEntryElement = document.createElement("div");
+        historyEntryElement.innerHTML = historyEntry.username + " - " + historyEntry.timestamp + " - " + historyEntry.fieldsText;
+        historyElement.appendChild(historyEntryElement);
+    });
+    
+    //historyElement.innerHTML = "ItemId: " + itemId + "<br/>Language: " + itemLanguage + "<br/>" + "<br/>Version: " + itemVersion + "<br/>" + apiData[0].username;
 }
 
 
 // function to fetch data from the glitter API
 async function fetchApiData(itemId, itemLanguage, itemVersion) {
-    let cleaneditemId = itemId.replace("{", "").replace("}", "");
-    let url = "https://glitterbucket.localhost/item/" + cleaneditemId + "/version/" + itemVersion;
-    alert(url);
+    
+    let url = "https://glitterbucket.localhost/item/" + itemId + "/version/" + itemVersion;
     let response = await fetch(url);
     let historydata = await response.json();
-    return historydata[0].title;
+    return historydata;
+}
+
+// function renderItemData(parentElement, itemDataName, itemData) {
+//     var historyItemElement = document.createElement("div");
+//     historyItemElement.className = "itemdata";
+//     historyItemElement.innerHTML = itemDataName + ": " + itemData;
+    
+//     parentElement.appendChild(historyItemElement);
+// }
+
+function renderItemData(parentElement, itemDataName, itemData) {
+    
+    var historyItemTableRowElement = document.createElement("tr");
+    var historyItemTableCellHeaderElement = document.createElement("td");
+    historyItemTableCellHeaderElement.className = "header";
+    var historyItemTableCellDataElement = document.createElement("td");
+    historyItemTableCellDataElement.className = "data";
+    
+    historyItemTableCellHeaderElement.innerHTML = itemDataName + ": ";
+    historyItemTableCellDataElement.innerHTML = itemData;
+
+    historyItemTableRowElement.appendChild(historyItemTableCellHeaderElement);
+    historyItemTableRowElement.appendChild(historyItemTableCellDataElement);
+
+    parentElement.appendChild(historyItemTableRowElement);
 }
