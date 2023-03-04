@@ -7,7 +7,7 @@ namespace GlitterBucket
         [HttpGet("")]
         public IActionResult Index()
         {
-            return Content("GlitterBucket - the bucket for GitterAudit");
+            return Content("GlitterBucket - the bucket for GlitterAudit");
         }
     }
 }

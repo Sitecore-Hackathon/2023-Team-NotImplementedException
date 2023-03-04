@@ -5,6 +5,9 @@
         public string EventName { get; set; }
 
         public ItemModel Item { get; set; }
+
+        public ItemChanges Changes { get; set; }
+
     }
 
     public class ItemModel
@@ -27,7 +30,6 @@
         
         public ICollection<FieldDate> VersionedFields { get; set; }
 
-        public ItemChanges Changes { get; set; }
     }
 
     public class FieldDate
