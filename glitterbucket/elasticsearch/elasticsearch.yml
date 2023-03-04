@@ -15,3 +15,7 @@ path:
   logs: "C:\\Data\\logs"
 
 xpack.license.self_generated.type: basic
+xpack.security.autoconfiguration.enabled: false
+xpack.security.http.ssl.enabled: false
+xpack.security.transport.ssl.enabled: false
+xpack.security.enabled: false
