@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  loki:
+    build:
+      context: ./loki
+    volumes:
+      - "./data/loki:c:/data"
+
+  grafana:
+    build:
+      context: ./grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./data/grafana:c:/data"
+    environment:
+      GF_PATHS_DATA: c:\data
