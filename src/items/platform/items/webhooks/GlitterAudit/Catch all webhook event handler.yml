@@ -2,7 +2,7 @@
 ID: "1a4a297a-b21a-4090-bee2-90db8a750d9e"
 Parent: "46eac1d3-de62-475d-9973-d34a81945ae4"
 Template: "f05212ce-30a7-4733-a7f4-ed6e13f26692"
-Path: /sitecore/system/Settings/Webhooks/GlitterAudit/Catch all webhook event handler
+Path: /sitecore/system/Webhooks/GlitterAudit/Catch all webhook event handler
 SharedFields:
 - ID: "70bcf39c-e567-4bc5-9dfa-3503810ef820"
   Hint: Enabled
@@ -36,7 +36,7 @@ Languages:
   Fields:
   - ID: "305fa64b-5785-4171-aa73-de715e21ae21"
     Hint: Description
-    Value: "See https://webhook.site/#!/104ae59c-9d57-406d-9887-30a380adb865"
+    Value: "See https://webhook.site/104ae59c-9d57-406d-9887-30a380adb865"
   Versions:
   - Version: 1
     Fields:
@@ -53,11 +53,11 @@ Languages:
         sitecore\per.bering@valtech.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "4cf22dd4-4480-4631-b602-3a23b4af9b3f"
+      Value: "cca79e9c-6094-40ab-83dd-c6e6cd03d02a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\per.bering@valtech.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230304T122416Z
+      Value: 20230304T130906Z

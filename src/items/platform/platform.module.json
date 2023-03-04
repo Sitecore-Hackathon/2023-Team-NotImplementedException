@@ -10,7 +10,7 @@
             },
             {
                 "name": "webhooks",
-                "path": "/sitecore/system/Settings/Webhooks/GlitterAudit"
+                "path": "/sitecore/system/Webhooks/GlitterAudit"
             }
         ]
     }
