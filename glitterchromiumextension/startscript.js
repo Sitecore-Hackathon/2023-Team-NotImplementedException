@@ -1,5 +1,3 @@
-
-
 // Get item information from Sitecore
 function getCurrentItemInformation() {
     
@@ -73,7 +71,12 @@ chrome.tabs.query({
       .then(injectionResults => {
         for (const frameResult of injectionResults) {
           const {frameId, result} = frameResult;
-          updateExtensionInterface(result.itemId, result.itemLanguage, result.itemVersion);
+            if(result && result.itemId != null && result.itemLanguage != null && result.itemVersion != null) {
+                updateExtensionInterface(result.itemId, result.itemLanguage, result.itemVersion);
+            } else {
+                var historyElement = document.getElementById("history");
+                historyElement.innerHTML = "No item information found";
+            }
         }
       });
 });
@@ -89,7 +92,10 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
 
 // function to fetch data from the glitter API
 async function fetchApiData(itemId, itemLanguage, itemVersion) {
-    let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    let cleaneditemId = itemId.replace("{", "").replace("}", "");
+    let url = "https://glitterbucket.localhost/item/" + cleaneditemId + "/version/" + itemVersion;
+    alert(url);
+    let response = await fetch(url);
     let historydata = await response.json();
     return historydata[0].title;
 }
