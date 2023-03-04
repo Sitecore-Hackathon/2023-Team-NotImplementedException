@@ -4,12 +4,11 @@
 .vs
 .config
 .sitecore
-glitteraudit/docker/
-glitteraudit/packages
+glitterxmc/docker/
+glitterxmc/packages
 **/bin/
 **/obj/
 **/out/
-**/node_modules/
 **/.generated/
 **/.next*/
 **/.vscode/

@@ -153,7 +153,7 @@ if ($InitEnv) {
 
 Write-Host "Done!" -ForegroundColor Green
 
-Push-Location .\glitteraudit\docker\traefik\certs
+Push-Location (Join-Path $PSScriptRoot "\docker\traefik\certs")
 try
 {
     Write-Host

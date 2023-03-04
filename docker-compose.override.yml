@@ -20,7 +20,7 @@ services:
       - source: \\.\pipe\docker_engine\
         target: \\.\pipe\docker_engine\
         type: npipe
-      - ./glitteraudit/docker/traefik:C:/etc/traefik
+      - ./glitterxmc/docker/traefik:C:/etc/traefik
     depends_on:
       cm:
         condition: service_healthy
@@ -38,7 +38,7 @@ services:
       ACCEPT_EULA: "Y"
     volumes:
       - type: bind
-        source: .\glitteraudit\docker\data\sql
+        source: ${LOCAL_DATA_PATH}\sql
         target: C:\data
     deploy:
       resources:
@@ -75,7 +75,7 @@ services:
       - "8984:8983"
     volumes:
       - type: bind
-        source: .\glitteraudit\docker\data\solr
+        source: ${LOCAL_DATA_PATH}\solr
         target: C:\data
     environment:
       SOLR_MODE: solrcloud

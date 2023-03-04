@@ -40,7 +40,7 @@ Best Enhancement to XM Cloud
 
 ### Setup (once)
 
-1. Run `.\glitteraudit\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
+1. Run `.\glitterxmc\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
 1. Run `dotnet tool restore`
 1. Run `dotnet sitecore cloud login`
 1. Run `dotnet sitecore connect --ref xmcloud --cm https://xmcloudcm.localhost --allow-write true -n default`
