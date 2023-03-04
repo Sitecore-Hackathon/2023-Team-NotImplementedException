@@ -16,9 +16,34 @@ namespace GlitterBucket.BrowserExtension
         [Route("item/{itemId}")]
         public async Task<IActionResult> GetByItem(Guid itemId)
         {
-            var result = _client.GetByItemId(itemId);
+            var result = await _client.GetByItemId(itemId);
 
             return Ok(result);
         }
+
+        [Route("item/{itemId}/version/{version}")]
+        public async Task<IActionResult> GetByItem(Guid itemId, int version)
+        {
+            var result = await _client.GetByItemId(itemId);
+
+            var mock = new[]
+            {
+                new ExtensionChangeModel
+                {
+                    Timestamp = new DateTime(2022, 1, 1, 1, 1, 0),
+                    Username = @"sitecore\cni",
+                    FieldsText = "bla bla",
+                },
+                new ExtensionChangeModel
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Username = @"sitecore\jba",
+                    FieldsText = "bla bla2",
+                }
+            };
+
+            return Ok(mock);
+        }
+
     }
 }
