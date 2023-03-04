@@ -79,6 +79,7 @@ try {
     & $mkcert -install
     & $mkcert "xmcloudcm.localhost"
     & $mkcert "glitterbucket.localhost"
+    & $mkcert "kibana.localhost"
     & $mkcert "grafana.localhost"
     & $mkcert "elasticsearch.localhost"
 
@@ -102,6 +103,7 @@ Write-Host "Adding Windows hosts file entries..." -ForegroundColor Green
 Add-HostsEntry "xmcloudcm.localhost"
 Add-HostsEntry "grafana.localhost"
 Add-HostsEntry "glitterbucket.localhost"
+Add-HostsEntry "kibana.localhost"
 
 ###############################
 # Generate scjssconfig

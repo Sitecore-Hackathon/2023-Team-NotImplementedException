@@ -178,6 +178,20 @@ services:
       - "traefik.http.routers.elasticsearch-secure.tls=true"
       - "traefik.http.routers.elasticsearch-secure.middlewares=force-STS-Header"
 
+  kibana:
+    environment:
+      ELASTICSEARCH_HOSTS: http://elsticsearch:9200
+      server_publicBaseUrl: https://${KIBANA_HOST}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.kibana.loadbalancer.server.port=5601"
+      - "traefik.http.routers.kibana-secure.entrypoints=websecure"
+      - "traefik.http.routers.kibana-secure.rule=Host(`${KIBANA_HOST}`)"
+      - "traefik.http.routers.kibana-secure.tls=true"
+      - "traefik.http.routers.kibana-secure.middlewares=force-STS-Header"
+
   grafana:
     labels:
       - "traefik.enable=true"
@@ -190,8 +204,6 @@ services:
       - "traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
 
   glitterbucket:
-    environment:
-      ElasticSearch__Uri: http://elasticsearch:9200
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
