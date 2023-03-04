@@ -3,8 +3,15 @@ using GlitterBucket.Receive.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.AddServerHeader = false;
+});
+
 builder.Configuration
     .AddEnvironmentVariables();
+
+builder.Logging.AddConsole().AddConfiguration(builder.Configuration);
 
 builder.Services.AddMvcCore();
 
