@@ -20,7 +20,7 @@ Best Enhancement to XM Cloud
 
 Collects information on item, version and field changes to surface basic audit and historic information for Sitecore users *in context* of their current editor (ie. Content Editor, Experience Editor or Pages) using a browser extension. All data is stored in Elasticsearch and can be further queried and analyzed in great details.
 
-Purpose is also to show how to do integrations in Sitecore using webhooks, keeping functionality in a separate and isolated process.
+We also want to show how to do integrations in Sitecore using webhooks, keeping functionality in separate and isolated processes, perfect fit for XM Cloud but also a good approach for classic Sitecore 10.3 deployments.
 
 ### What problem was solved
 
