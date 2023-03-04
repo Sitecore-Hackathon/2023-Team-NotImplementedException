@@ -108,7 +108,11 @@ namespace GlitterBucket.ElasticSearchStorage
 
             if (!response.IsValid)
             {
-                throw response.OriginalException;
+                // Ignore if index already exists
+                if (response.ServerError?.Status != 400)
+                {
+                    throw response.OriginalException;
+                }
             }
         }
 
