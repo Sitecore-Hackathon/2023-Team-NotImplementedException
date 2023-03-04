@@ -17,6 +17,7 @@ RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
 FROM ${RUN_IMAGE}
+EXPOSE 80
 WORKDIR /app
 COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "glitterbucket.dll"]

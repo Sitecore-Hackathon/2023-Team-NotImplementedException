@@ -153,14 +153,14 @@ services:
 
   grafana:
     labels:
-      - traefik.enable=true"
-      - traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
-      - traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
-      - traefik.http.services.grafana.loadbalancer.server.port=3000
-      - traefik.http.routers.grafana-secure.entrypoints=websecure"
-      - traefik.http.routers.grafana-secure.rule=Host(`${GRAFANA_HOST}`)"
-      - traefik.http.routers.grafana-secure.tls=true"
-      - traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana-secure.entrypoints=websecure"
+      - "traefik.http.routers.grafana-secure.rule=Host(`${GRAFANA_HOST}`)"
+      - "traefik.http.routers.grafana-secure.tls=true"
+      - "traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
 
   glitterbucket:
     environment:
