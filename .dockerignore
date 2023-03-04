@@ -5,7 +5,7 @@
 .config
 .sitecore
 glitterxmc/docker/
-glitterxmc/packages
+glitterxmc/packages/
 **/bin/
 **/obj/
 **/out/
