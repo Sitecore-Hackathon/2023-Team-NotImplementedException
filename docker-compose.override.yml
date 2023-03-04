@@ -127,6 +127,7 @@ services:
       SITECORE_Pages_CORS_Allowed_Origins: ${SITECORE_Pages_CORS_Allowed_Origins}
       SITECORE_DEVELOPMENT_PATCHES: DevEnvOn,CustomErrorsOff,DebugOn,DiagnosticsOff,InitMessagesOff
       Sitecore_AppSettings_exmEnabled:define: "no"
+      ENTRYPOINT_STDOUT_IIS_ACCESS_LOG_ENABLED: 'false'
     entrypoint: powershell -Command "& C:/tools/entrypoints/iis/Development.ps1"
     healthcheck:
       test:
