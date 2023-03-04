@@ -44,6 +44,11 @@ services:
     environment:
       GF_PATHS_DATA: c:\data
 
+  kibana:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-kibana:${VERSION:-latest}
+    build:
+      context: ./glitterbucket/kibana
+
   elasticsearch:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-elasticsearch:${VERSION:-latest}
     build:
