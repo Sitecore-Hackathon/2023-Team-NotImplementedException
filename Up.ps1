@@ -22,13 +22,6 @@ if ($ClientCredentialsLogin -eq "true") {
 	$xmCloudClientCredentialsLoginClientSecret = $xmCloudClientCredentialsLoginClientSecret.Split("=")[1]
 }
 
-#set nuget version
-$xmCloudBuild = Get-Content "xmcloud.build.json" | ConvertFrom-Json
-$nodeVersion = $xmCloudBuild.renderingHosts.xmcloudpreview.nodeVersion
-if (![string]::IsNullOrWhitespace($nodeVersion)) {
-    Set-EnvFileVariable "NODEJS_VERSION" -Value $xmCloudBuild.renderingHosts.xmcloudpreview.nodeVersion
-}
-
 # Double check whether init has been run
 $envCheckVariable = "HOST_LICENSE_FOLDER"
 $envCheck = $envContent | Where-Object { $_ -imatch "^$envCheckVariable=.+" }
@@ -103,7 +96,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "Rebuilding indexes ..." -ForegroundColor Green
 dotnet sitecore index rebuild
 
-Write-Host "Pushing Default rendering host configuration" -ForegroundColor Green
+Write-Host "Pushing items" -ForegroundColor Green
 dotnet sitecore ser push
 
 if ($ClientCredentialsLogin -ne "true") {

@@ -1,0 +1,17 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "Platform",
+    "items": {
+        "includes": [
+            {
+                "name": "apikey",
+                "path": "/sitecore/system/Settings/Services/API Keys/GlitterAudit",
+                "scope": "singleItem"
+            },
+            {
+                "name": "webhooks",
+                "path": "/sitecore/system/Settings/Webhooks/GlitterAudit"
+            }
+        ]
+    }
+}
