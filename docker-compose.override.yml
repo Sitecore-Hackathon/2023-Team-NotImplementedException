@@ -190,8 +190,6 @@ services:
       - "traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
 
   glitterbucket:
-    build:
-      target: watch
     environment:
       ElasticSearch__Uri: http://elasticsearch:9200
     labels:
