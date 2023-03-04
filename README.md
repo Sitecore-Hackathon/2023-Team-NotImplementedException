@@ -11,4 +11,6 @@
 ### Getting started
 
 1. Run `.\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
+1. Run `dotnet tool restore`
+1. Open solution, publish platform...
 1. Run `.\Up.ps1`, opens <https://xmcloudcm.localhost/sitecore/>

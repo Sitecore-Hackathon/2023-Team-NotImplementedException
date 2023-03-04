@@ -1,0 +1,63 @@
+﻿---
+ID: "1a4a297a-b21a-4090-bee2-90db8a750d9e"
+Parent: "46eac1d3-de62-475d-9973-d34a81945ae4"
+Template: "f05212ce-30a7-4733-a7f4-ed6e13f26692"
+Path: /sitecore/system/Webhooks/GlitterAudit/Catch all webhook event handler
+SharedFields:
+- ID: "70bcf39c-e567-4bc5-9dfa-3503810ef820"
+  Hint: Enabled
+  Value: 1
+- ID: "81ad5a23-de34-4ff2-9276-035230250a37"
+  Hint: Events
+  Value: |
+    {EAB76990-706E-4343-B7FC-16A96A37C37F}
+    {CE714622-73F7-4892-9873-C234947FA52D}
+    {4EB17C13-DC1E-45CE-88F0-A88F4ADE3ADF}
+    {A56A9B5F-50B7-41F8-A176-707F0D9E03EB}
+    {3DCD3BFE-D09A-4CA3-ABDD-67E767FE3B29}
+    {1D323CBA-C898-4E13-A6C5-1DCDB292BAC9}
+    {723C4A34-9CE2-4D96-B1C6-B61A1425BE03}
+    {50DF427E-5A44-4004-9A8D-9B1A6E08F0D1}
+    {10F78F45-7C58-4753-A09E-41D890EA2A2B}
+    {7C7ECB12-AF42-4411-B5EA-7EF78CF73491}
+    {194583FD-FE2F-4E1B-A021-96E828935E3C}
+    {34750BC1-8A3F-4654-A47F-A0AC232F1D17}
+    {C4BBE403-4E24-4152-A7DD-E4794C1035F5}
+    {B87E9607-0AB4-42DE-AB3D-AFF6A56719A1}
+    {1C4FA567-26F7-4DC2-AE46-250914C82EB6}
+    {FE2D8B0D-26CC-4610-A380-5F24C756DF30}
+    {08C0376C-098E-4A7D-A75E-B157BB6862E0}
+    {8CD40F15-596D-49D0-9286-87750E2592CC}
+- ID: "f9f59338-045d-4da8-80f0-ce7f7d92e4af"
+  Hint: Url
+  Value: "https://webhook.site/104ae59c-9d57-406d-9887-30a380adb865"
+Languages:
+- Language: en
+  Fields:
+  - ID: "305fa64b-5785-4171-aa73-de715e21ae21"
+    Hint: Description
+    Value: "See https://webhook.site/104ae59c-9d57-406d-9887-30a380adb865"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20230304T115919Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\per.bering@valtech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\per.bering@valtech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "cca79e9c-6094-40ab-83dd-c6e6cd03d02a"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\per.bering@valtech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20230304T130906Z

@@ -22,13 +22,6 @@ if ($ClientCredentialsLogin -eq "true") {
 	$xmCloudClientCredentialsLoginClientSecret = $xmCloudClientCredentialsLoginClientSecret.Split("=")[1]
 }
 
-#set nuget version
-$xmCloudBuild = Get-Content "xmcloud.build.json" | ConvertFrom-Json
-$nodeVersion = $xmCloudBuild.renderingHosts.xmcloudpreview.nodeVersion
-if (![string]::IsNullOrWhitespace($nodeVersion)) {
-    Set-EnvFileVariable "NODEJS_VERSION" -Value $xmCloudBuild.renderingHosts.xmcloudpreview.nodeVersion
-}
-
 # Double check whether init has been run
 $envCheckVariable = "HOST_LICENSE_FOLDER"
 $envCheck = $envContent | Where-Object { $_ -imatch "^$envCheckVariable=.+" }
@@ -92,18 +85,13 @@ if ($LASTEXITCODE -ne 0) {
     Write-Error "Unable to log into Sitecore, did the Sitecore environment start correctly? See logs above."
 }
 
-# Populate Solr managed schemas to avoid errors during item deploy
 Write-Host "Populating Solr managed schema..." -ForegroundColor Green
 dotnet sitecore index schema-populate
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Populating Solr managed schema failed, see errors above."
 }
 
-# Rebuild indexes
-Write-Host "Rebuilding indexes ..." -ForegroundColor Green
-dotnet sitecore index rebuild
-
-Write-Host "Pushing Default rendering host configuration" -ForegroundColor Green
+Write-Host "Pushing items" -ForegroundColor Green
 dotnet sitecore ser push
 
 if ($ClientCredentialsLogin -ne "true") {
