@@ -1,0 +1,13 @@
+{
+    "name": "Glitter Audit for Sitecore XM cloud",
+    "description": "View Sitecore item history and compare versions",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "historypopup.js"
+    },
+    "permissions": ["storage", "tabs", "activeTab", "scripting"],
+    "action": {
+        "default_popup": "historypopup.html"
+    }
+}
