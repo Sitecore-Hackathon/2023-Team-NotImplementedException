@@ -11,7 +11,7 @@ Param (
 
     # We do not need to use [SecureString] here since the value will be stored unencrypted in .env,
     # and used only for transient local development environments.
-    [Parameter(Mandatory = $true,
+    [Parameter(Mandatory = $false,
         HelpMessage = "Sets the sitecore\\admin password for this environment via environment variable.",
         ParameterSetName = "env-init")]
     [string]$AdminPassword = "b"

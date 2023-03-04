@@ -20,7 +20,7 @@ services:
       - source: \\.\pipe\docker_engine\
         target: \\.\pipe\docker_engine\
         type: npipe
-      - ./docker/traefik:C:/etc/traefik
+      - ./glitteraudit/docker/traefik:C:/etc/traefik
     depends_on:
       cm:
         condition: service_healthy
@@ -33,8 +33,8 @@ services:
       ACCEPT_EULA: "Y"
     volumes:
       - type: bind
-        source: .\docker\data\sql
-        target: c:\data
+        source: .\glitteraudit\docker\data\sql
+        target: C:\data
 
   mssql-init:
     isolation: ${ISOLATION}
@@ -65,7 +65,7 @@ services:
       - "8984:8983"
     volumes:
       - type: bind
-        source: .\docker\data\solr
+        source: .\glitteraudit\docker\data\solr
         target: C:\data
     environment:
       SOLR_MODE: solrcloud
