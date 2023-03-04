@@ -30,13 +30,15 @@ function getCurrentItemInformation() {
             }
             
             // if nothing was found, try to get the data from the querystring
-            let params = new URLSearchParams(window.location.search);
-            itemId = params.get("sc_itemid");
-            itemLanguage = params.get("sc_lang");
-            itemVersion = params.get("sc_version");
-
+            if (itemId == null || itemLanguage == null || itemVersion == null) { 
+                let params = new URLSearchParams(window.location.search);
+                itemId = params.get("sc_itemid");
+                itemLanguage = params.get("sc_lang");
+                itemVersion = params.get("sc_version");
+            }
             
-            // if nothing was found, try to get the itemversion from the ribbon :S
+            
+            // if itemVersion was not found found, try to get the itemversion from the ribbon :S
             if (itemVersion == null) {
                 var element = document.getElementById('scWebEditRibbon').contentWindow.document.querySelectorAll('[data-sc-id="PageEditBar"]');
                 if (element && element.length > 0) {

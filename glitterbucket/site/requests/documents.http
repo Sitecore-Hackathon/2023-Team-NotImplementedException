@@ -1,0 +1,8 @@
+POST https://elasticsearch.localhost/glitteraudit-*/_search
+Content-Type: application/json
+
+{
+    "query": {
+        "match_all": {}
+    }
+}
