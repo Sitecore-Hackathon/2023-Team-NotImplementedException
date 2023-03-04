@@ -31,5 +31,7 @@ namespace GlitterBucket.ElasticSearchStorage
 
         [Keyword]
         public string SitecoreInstance { get; init; } = "DefaultInstance";
+
+        public string? ChangedFields { get; init; }
     }
 }

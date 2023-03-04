@@ -28,7 +28,7 @@ namespace GlitterBucket.BrowserExtension
         [HttpGet("item/{itemId}/language/{language}/version/{version}")]
         public async Task<IActionResult> GetByItem(Guid itemId, string language, int version)
         {
-            var result = await _client.GetByItemId(itemId);
+            var result = await _client.GetByItem(itemId, language, version);
 
             var data = result.Select(x => new ExtensionChangeModel
             {

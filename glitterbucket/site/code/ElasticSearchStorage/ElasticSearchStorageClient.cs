@@ -27,16 +27,16 @@ namespace GlitterBucket.ElasticSearchStorage
 
             if (raw == null)
             {
-                using var stream = new MemoryStream();
-                await JsonSerializer.SerializeAsync(stream, model);
-                using var reader = new StreamReader(stream);
-                raw = await reader.ReadToEndAsync();
+                raw = await Serialize(model) ?? throw new ArgumentException("model was unexpected serialized to null");
             }
 
             var indexName = IndexName;
+            await EnsureIndex(indexName);
 
             var fieldIds = model.Changes?.FieldChanges?.Select(x => x.FieldId).ToArray() ?? Array.Empty<Guid>();
             var userName = model.Changes?.FieldChanges?.FirstOrDefault(x => x.FieldId == FieldIdEditor)?.Value;
+            var changedFields = await Serialize(model.Changes?.FieldChanges?
+                .Select(x => new { field = x.FieldId, from = x.OriginalValue, to = x.Value }).ToArray());
             var fields = new IndexChangeModel
             {
                 Timestamp = now,
@@ -48,6 +48,7 @@ namespace GlitterBucket.ElasticSearchStorage
                 Language = model.Item?.Language,
                 SitecoreInstance = sitecoreInstanceId,
                 FieldIds = fieldIds,
+                ChangedFields = changedFields,
                 User = userName,
             };
             await _client.CreateAsync(fields, opt => opt.Index(indexName).Id(Guid.NewGuid()));
@@ -81,6 +82,19 @@ namespace GlitterBucket.ElasticSearchStorage
             return result.Hits.Select(hit => hit.Source);
         }
 
+        private static async Task<string?> Serialize<T>(T model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using var stream = new MemoryStream();
+            await JsonSerializer.SerializeAsync(stream, model);
+            using var reader = new StreamReader(stream);
+            var result = await reader.ReadToEndAsync();
+            return result;
+        }
+
         private Task EnsureIndex(string indexName)
         {
             return _client.Indices.CreateAsync(indexName, s => s
@@ -89,5 +103,7 @@ namespace GlitterBucket.ElasticSearchStorage
                 ).Map(m => m.AutoMap()));
 
         }
+
+
     }
 }
