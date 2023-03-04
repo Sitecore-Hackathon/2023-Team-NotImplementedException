@@ -6,7 +6,7 @@ services:
       context: ./glitterxmc
       args:
         BUILD_CONFIGURATION: ${BUILD_CONFIGURATION}
-        BUILD_IMAGE: mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022
+        BUILD_IMAGE: mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
 
   mssql:
     image: ${SITECORE_NONPRODUCTION_DOCKER_REGISTRY}nonproduction/mssql-developer:2017-${EXTERNAL_IMAGE_TAG_SUFFIX}
