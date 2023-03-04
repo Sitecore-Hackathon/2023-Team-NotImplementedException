@@ -85,16 +85,11 @@ if ($LASTEXITCODE -ne 0) {
     Write-Error "Unable to log into Sitecore, did the Sitecore environment start correctly? See logs above."
 }
 
-# Populate Solr managed schemas to avoid errors during item deploy
 Write-Host "Populating Solr managed schema..." -ForegroundColor Green
 dotnet sitecore index schema-populate
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Populating Solr managed schema failed, see errors above."
 }
-
-# Rebuild indexes
-Write-Host "Rebuilding indexes ..." -ForegroundColor Green
-dotnet sitecore index rebuild
 
 Write-Host "Pushing items" -ForegroundColor Green
 dotnet sitecore ser push
