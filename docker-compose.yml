@@ -44,3 +44,5 @@ services:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-glitterbucket:${VERSION:-latest}
     build:
       context: ./glitterbucket/site
+      args:
+        BUILD_CONFIGURATION: ${BUILD_CONFIGURATION}

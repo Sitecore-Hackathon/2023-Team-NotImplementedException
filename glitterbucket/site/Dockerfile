@@ -13,7 +13,8 @@ RUN dotnet restore
 # copy everything else and build app
 COPY code/ ./code/
 WORKDIR /source/code
-RUN dotnet publish -c release -o /app --no-restore
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish -c %BUILD_CONFIGURATION% -o /app --no-restore
 
 # final stage/image
 FROM ${RUN_IMAGE}
