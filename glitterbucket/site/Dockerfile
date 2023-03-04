@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=mcr.microsoft.com/dotnet/sdk:6.0
-ARG RUN_IMAGE=mcr.microsoft.com/dotnet/aspnet:6.0
+ARG BUILD_IMAGE=mcr.microsoft.com/dotnet/sdk:7.0
+ARG RUN_IMAGE=mcr.microsoft.com/dotnet/aspnet:7.0
 
 FROM ${BUILD_IMAGE} AS base
 
@@ -16,9 +16,12 @@ WORKDIR /source/code
 
 FROM base as watch
 
+ARG BUILD_CONFIGURATION=Release
+
 ENV DOTNET_USE_POLLING_FILE_WATCHER=1 \
     DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER=1 \
-    ASPNETCORE_URLS=http://*:3000
+    ASPNETCORE_URLS=http://*:3000 \
+    BUILD_CONFIGURATION=${BUILD_CONFIGURATION}
 
 ENTRYPOINT ["dotnet", "watch", "--", "run", "--no-launch-profile", "--no-restore", "-c", "Debug"]
 
@@ -29,7 +32,7 @@ RUN dotnet publish -c %BUILD_CONFIGURATION% -o /app --no-restore
 
 
 # final stage/image
-FROM ${RUN_IMAGE}
+FROM ${RUN_IMAGE} as production
 EXPOSE 3000
 ENV ASPNETCORE_URLS=http://*:3000
 WORKDIR /app
