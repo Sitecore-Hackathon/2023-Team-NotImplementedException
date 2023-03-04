@@ -14,11 +14,11 @@ Best Enhancement to XM Cloud
 
 ## Description
 
-Glitter Audit
+Glitter Audit, your goto XM Cloud tool for everything content auditing!
 
 ### Module Purpose
 
-**... TODO ...**
+Collect information on item, version and field changes and surface basic audit information for Sitecore users in context of their current editor (ie. Content Editor, Experience Editor or Pages) using a browser extension. All data is stored in Elastic Search and can be further queried and analyzed using Grafana.
 
 ### What problem was solved
 
@@ -49,7 +49,7 @@ Glitter Audit
 
 ### Startup
 
-1. Run `docker compose up -d --build`
+1. Run `docker-compose up -d --build`
 1. Run `dotnet sitecore index schema-populate`
 1. Run `dotnet sitecore ser push`
 1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore webhooks *only* initializes during startup OR item:save on a handler but NOT when pushing serialized items... \*sigh\*)
@@ -57,7 +57,7 @@ Glitter Audit
 
 ### Shutdown
 
-1. Run `docker compose down`
+1. Run `docker-compose down`
 
 ### Configuration
 
