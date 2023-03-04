@@ -1,9 +1,11 @@
 ﻿using GlitterBucket.Shared;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlitterBucket.BrowserExtension
 {
     [ApiController]
+    [EnableCors]
     public class BrowserExtensionRetrieveController : Controller
     {
         private readonly IStorageClient _client;

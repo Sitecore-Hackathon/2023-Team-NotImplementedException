@@ -31,4 +31,6 @@ app.UseStaticFiles();
 
 app.MapControllers();
 
+app.UseCors(p => p.AllowAnyOrigin().Build());
+
 app.Run();
