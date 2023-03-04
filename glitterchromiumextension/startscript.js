@@ -102,8 +102,6 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
         historyEntryElement.innerHTML = historyEntry.username + " - " + historyEntry.timestamp + " - " + historyEntry.fieldsText;
         historyElement.appendChild(historyEntryElement);
     });
-    
-    //historyElement.innerHTML = "ItemId: " + itemId + "<br/>Language: " + itemLanguage + "<br/>" + "<br/>Version: " + itemVersion + "<br/>" + apiData[0].username;
 }
 
 
@@ -116,13 +114,6 @@ async function fetchApiData(itemId, itemLanguage, itemVersion) {
     return historydata;
 }
 
-// function renderItemData(parentElement, itemDataName, itemData) {
-//     var historyItemElement = document.createElement("div");
-//     historyItemElement.className = "itemdata";
-//     historyItemElement.innerHTML = itemDataName + ": " + itemData;
-    
-//     parentElement.appendChild(historyItemElement);
-// }
 
 function renderItemData(parentElement, itemDataName, itemData) {
     
