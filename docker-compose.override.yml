@@ -151,6 +151,17 @@ services:
       solr-init:
         condition: service_started
 
+  elasticsearch:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.elasticsearch.loadbalancer.server.port=9200"
+      - "traefik.http.routers.elasticsearch-secure.entrypoints=websecure"
+      - "traefik.http.routers.elasticsearch-secure.rule=Host(`${ES_HOST}`)"
+      - "traefik.http.routers.elasticsearch-secure.tls=true"
+      - "traefik.http.routers.elasticsearch-secure.middlewares=force-STS-Header"
+
   grafana:
     labels:
       - "traefik.enable=true"

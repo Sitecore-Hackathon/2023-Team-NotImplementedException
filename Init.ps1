@@ -80,6 +80,7 @@ try {
     & $mkcert "xmcloudcm.localhost"
     & $mkcert "glitterbucket.localhost"
     & $mkcert "grafana.localhost"
+    & $mkcert "elasticsearch.localhost"
 
     # stash CAROOT path for messaging at the end of the script
     $caRoot = "$(& $mkcert -CAROOT)\rootCA.pem"
