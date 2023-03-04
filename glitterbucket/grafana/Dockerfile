@@ -1,6 +1,6 @@
-ARG BUILD_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2022
+ARG BASE_IMAGE=mcr.microsoft.com/windows/servercore:ltsc2022
 
-FROM ${BUILD_IMAGE}
+FROM ${BASE_IMAGE}
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -13,6 +13,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
     Move-Item grafana* grafana ; \
     Remove-Item /grafana/conf/provisioning/dashboards/* ; 
 
-COPY custom.ini /grafana/conf/
+# COPY custom.ini /grafana/conf/
 
 ENTRYPOINT "c:\grafana\bin\grafana-server.exe" --homepath=c:\\grafana --packaging=docker

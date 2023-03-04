@@ -97,6 +97,8 @@ finally {
 Write-Host "Adding Windows hosts file entries..." -ForegroundColor Green
 
 Add-HostsEntry "xmcloudcm.localhost"
+Add-HostsEntry "grafana.localhost"
+Add-HostsEntry "glitterbucket.localhost"
 
 ###############################
 # Generate scjssconfig
@@ -130,6 +132,8 @@ if ($InitEnv) {
 
     # CM_HOST
     Set-EnvFileVariable "CM_HOST" -Value "xmcloudcm.localhost"
+    Set-EnvFileVariable "GRAFANA_HOST" -Value "grafana.localhost"
+    Set-EnvFileVariable "GLITTERBUCKET_HOST" -Value "glitterbucket.localhost"
 
     # TELERIK_ENCRYPTION_KEY = random 64-128 chars
     Set-EnvFileVariable "TELERIK_ENCRYPTION_KEY" -Value (Get-SitecoreRandomString 128)
