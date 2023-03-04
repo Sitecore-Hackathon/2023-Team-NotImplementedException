@@ -4,9 +4,8 @@
 .vs
 .config
 .sitecore
-build
-docker
-packages
+glitteraudit/docker/
+glitteraudit/packages
 **/bin/
 **/obj/
 **/out/
@@ -21,7 +20,6 @@ packages
 docker-compose*
 **/*.md
 *.ps1
-scjssconfig.json
 **/*.yml
 **/*.module.json
 sitecore.json

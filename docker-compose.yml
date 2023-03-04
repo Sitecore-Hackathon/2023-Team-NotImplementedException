@@ -15,7 +15,7 @@ services:
   cm:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xmcloud-cm:${VERSION:-latest}
     build:
-      context: ./docker/build/cm
+      context: ./glitteraudit/docker/build/cm
       args:
         PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
         TOOLS_IMAGE: ${TOOLS_IMAGE}

@@ -94,6 +94,9 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "Pushing items" -ForegroundColor Green
 dotnet sitecore ser push
 
+# unfortunately Sitecore Webhooks *only* initializes during startup or item:save and NOT when pushing serialized items
+curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx
+
 if ($ClientCredentialsLogin -ne "true") {
     Write-Host "Opening site..." -ForegroundColor Green
 
