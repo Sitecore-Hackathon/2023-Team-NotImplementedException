@@ -206,7 +206,7 @@ services:
 
   glitterbucket:
     environment:
-      ElasticSearch__Uri: http://elsticsearch:9200
+      ElasticSearch__Uri: http://elasticsearch:9200
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
