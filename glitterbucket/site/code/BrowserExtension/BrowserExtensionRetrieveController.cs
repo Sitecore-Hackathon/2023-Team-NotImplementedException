@@ -13,7 +13,7 @@ namespace GlitterBucket.BrowserExtension
             _client = client;
         }
 
-        [Route("item/{itemId}")]
+        [HttpGet("item/{itemId}")]
         public async Task<IActionResult> GetByItem(Guid itemId)
         {
             var result = await _client.GetByItemId(itemId);
@@ -21,7 +21,7 @@ namespace GlitterBucket.BrowserExtension
             return Ok(result);
         }
 
-        [Route("item/{itemId}/version/{version}")]
+        [HttpGet("item/{itemId}/version/{version}")]
         public async Task<IActionResult> GetByItem(Guid itemId, int version)
         {
             var result = await _client.GetByItemId(itemId);
