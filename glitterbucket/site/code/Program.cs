@@ -1,4 +1,5 @@
 using GlitterBucket.ElasticSearchStorage;
+using GlitterBucket.Receive;
 using GlitterBucket.Receive.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +16,8 @@ builder.Logging.AddConsole().AddConfiguration(builder.Configuration);
 
 builder.Services.AddMvcCore();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IConfiguration>().GetSection("Sitecore").Get<ReceivingInstance>());
 builder.AddElasticSearchStorage();
+builder.AddReceiveServices();
 
 var app = builder.Build();
 
