@@ -137,6 +137,7 @@ services:
       SITECORE_Pages_CORS_Allowed_Origins: ${SITECORE_Pages_CORS_Allowed_Origins}
       SITECORE_DEVELOPMENT_PATCHES: DevEnvOn,CustomErrorsOff,DebugOn,DiagnosticsOff,InitMessagesOff
       Sitecore_AppSettings_exmEnabled:define: "no"
+      ENTRYPOINT_STDOUT_IIS_ACCESS_LOG_ENABLED: 'false'
     entrypoint: powershell -Command "& C:/tools/entrypoints/iis/Development.ps1"
     healthcheck:
       test:
@@ -165,3 +166,40 @@ services:
         limits:
           cpus: "2.0"
           memory: 4GB
+
+  elasticsearch:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.elasticsearch.loadbalancer.server.port=9200"
+      - "traefik.http.routers.elasticsearch-secure.entrypoints=websecure"
+      - "traefik.http.routers.elasticsearch-secure.rule=Host(`${ES_HOST}`)"
+      - "traefik.http.routers.elasticsearch-secure.tls=true"
+      - "traefik.http.routers.elasticsearch-secure.middlewares=force-STS-Header"
+
+  grafana:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.grafana-secure.entrypoints=websecure"
+      - "traefik.http.routers.grafana-secure.rule=Host(`${GRAFANA_HOST}`)"
+      - "traefik.http.routers.grafana-secure.tls=true"
+      - "traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
+
+  glitterbucket:
+    build:
+      target: watch
+    environment:
+      ElasticSearch__Uri: http://elasticsearch:9200
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.force-STS-Header.headers.stsSeconds=31536000"
+      - "traefik.http.services.glitterbucket.loadbalancer.server.port=3000"
+      - "traefik.http.routers.glitterbucket-secure.entrypoints=websecure"
+      - "traefik.http.routers.glitterbucket-secure.rule=Host(`${GLITTERBUCKET_HOST}`)"
+      - "traefik.http.routers.glitterbucket-secure.tls=true"
+      - "traefik.http.routers.glitterbucket-secure.middlewares=force-STS-Header"

@@ -30,3 +30,30 @@ services:
         SOLUTION_IMAGE: ${COMPOSE_PROJECT_NAME}-solution:${VERSION:-latest}
     depends_on:
       - solution
+
+  grafana:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-grafana:${VERSION:-latest}
+    build:
+      context: ./glitterbucket/grafana
+      args:
+        BASE_IMAGE: mcr.microsoft.com/windows/servercore:${EXTERNAL_IMAGE_TAG_SUFFIX}
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./glitterbucket/data/grafana:c:/data"
+    environment:
+      GF_PATHS_DATA: c:\data
+
+  elasticsearch:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-elasticsearch:${VERSION:-latest}
+    build:
+      context: ./glitterbucket/elasticsearch
+    volumes:
+      - "./glitterbucket/data/elasticsearch:c:/data"
+
+  glitterbucket:
+    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-glitterbucket:${VERSION:-latest}
+    build:
+      context: ./glitterbucket/site
+      args:
+        BUILD_CONFIGURATION: ${BUILD_CONFIGURATION}
