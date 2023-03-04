@@ -1,4 +1,4 @@
-﻿namespace GlitterBucket.Receive.Configuration
+﻿namespace GlitterBucket.ElasticSearchStorage
 {
 
     public class ElasticSearchStorage

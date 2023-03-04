@@ -1,4 +1,4 @@
-﻿namespace GlitterBucket.Receive.Models
+﻿namespace GlitterBucket.Shared
 {
     public class SitecoreWebHookModel
     {
@@ -27,7 +27,7 @@
         public ICollection<FieldDate>? SharedFields { get; set; }
 
         public ICollection<FieldDate>? UnversionedFields { get; set; }
-        
+
         public ICollection<FieldDate>? VersionedFields { get; set; }
 
     }
