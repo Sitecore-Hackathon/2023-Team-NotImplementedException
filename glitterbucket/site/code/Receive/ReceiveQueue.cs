@@ -7,9 +7,9 @@ namespace GlitterBucket.Receive
 {
     public struct ReceivedWebhookData
     {
-        public string SitecoreInstanceId { get; set; }
+        public string SitecoreInstanceId { get; init; }
 
-        public string ReceivedData { get; set; }
+        public string ReceivedData { get; init; }
     }
 
 
