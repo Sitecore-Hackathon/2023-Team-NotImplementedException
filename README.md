@@ -12,5 +12,6 @@
 
 1. Run `.\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
 1. Run `dotnet tool restore`
-1. Open solution, publish platform...
+1. Run `msbuild D:\git\2023-Team-NotImplementedException /t:"Restore;Build;WebPublish" /p:DeployOnBuild=true /p:PublishProfile=Local` or open Visual Studio solution and publish the `Platform` project.
 1. Run `.\Up.ps1`, opens <https://xmcloudcm.localhost/sitecore/>
+1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore Webhooks *only* initializes during startup or item:save and NOT when pushing serialized items)
