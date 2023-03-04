@@ -61,7 +61,7 @@ Write-SitecoreDockerWelcome
 # Configure TLS/HTTPS certificates
 ##################################
 
-Push-Location docker\traefik\certs
+Push-Location (Join-Path $PSScriptRoot "docker\traefik\certs")
 try {
     $mkcert = ".\mkcert.exe"
     if ($null -ne (Get-Command mkcert.exe -ErrorAction SilentlyContinue)) {
@@ -153,7 +153,7 @@ if ($InitEnv) {
 
 Write-Host "Done!" -ForegroundColor Green
 
-Push-Location docker\traefik\certs
+Push-Location .\glitteraudit\docker\traefik\certs
 try
 {
     Write-Host

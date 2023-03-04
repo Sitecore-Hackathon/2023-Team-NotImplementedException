@@ -1,5 +1,13 @@
 services:
 
+  solution:
+    image: ${COMPOSE_PROJECT_NAME}-solution:${VERSION:-latest}
+    build:
+      context: ./glitteraudit
+      args:
+        BUILD_CONFIGURATION: ${BUILD_CONFIGURATION}
+        BUILD_IMAGE: mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022
+
   mssql:
     image: ${SITECORE_NONPRODUCTION_DOCKER_REGISTRY}nonproduction/mssql-developer:2017-${EXTERNAL_IMAGE_TAG_SUFFIX}
 
@@ -19,3 +27,6 @@ services:
       args:
         PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
         TOOLS_IMAGE: ${TOOLS_IMAGE}
+        SOLUTION_IMAGE: ${COMPOSE_PROJECT_NAME}-solution:${VERSION:-latest}
+    depends_on:
+      - solution

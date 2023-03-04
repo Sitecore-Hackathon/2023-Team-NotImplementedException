@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PlatformVersion>1.2.507</PlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Sitecore.XmCloud.Kernel" Version="$(PlatformVersion)" />
+    <PackageVersion Include="Sitecore.XmCloud.ContentSearch" Version="$(PlatformVersion)" />
+    <PackageVersion Include="Sitecore.XmCloud.ContentSearch.Linq" Version="$(PlatformVersion)" />
+    <PackageVersion Include="Sitecore.XmCloud.LayoutService" Version="$(PlatformVersion)" />
+    <PackageVersion Include="Sitecore.XmCloud.Assemblies" Version="$(PlatformVersion)" />
+    <PackageVersion Include="Sitecore.Assemblies.SitecoreHeadlessServicesServer" Version="21.0.583" />
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
 {
   "$schema": "./.sitecore/schemas/RootConfigurationFile.schema.json",
   "modules": [
-    "src/items/**/*.module.json"
+    "glitteraudit/src/items/**/*.module.json"
   ],
   "plugins": [
     "Sitecore.DevEx.Extensibility.Serialization@5.1.25",

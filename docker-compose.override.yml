@@ -25,6 +25,11 @@ services:
       cm:
         condition: service_healthy
 
+  solution:
+    isolation: ${ISOLATION}
+    deploy:
+      replicas: 0
+
   mssql:
     isolation: ${ISOLATION}
     environment:
@@ -35,6 +40,11 @@ services:
       - type: bind
         source: .\glitteraudit\docker\data\sql
         target: C:\data
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4GB
 
   mssql-init:
     isolation: ${ISOLATION}
@@ -150,3 +160,8 @@ services:
         condition: service_healthy
       solr-init:
         condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4GB
