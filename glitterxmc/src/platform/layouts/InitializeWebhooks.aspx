@@ -6,6 +6,6 @@
         new Sitecore.Pipelines.Loader.InitializeWebhooks().Process(null);
 
         Response.ContentType = "text/plain";
-        Response.Write("ok");
+        Response.Write("ok\n");
     }
 </script>

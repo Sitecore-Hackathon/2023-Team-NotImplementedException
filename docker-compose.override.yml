@@ -20,10 +20,15 @@ services:
       - source: \\.\pipe\docker_engine\
         target: \\.\pipe\docker_engine\
         type: npipe
-      - ./glitteraudit/docker/traefik:C:/etc/traefik
+      - ./glitterxmc/docker/traefik:C:/etc/traefik
     depends_on:
       cm:
         condition: service_healthy
+
+  solution:
+    isolation: ${ISOLATION}
+    deploy:
+      replicas: 0
 
   mssql:
     isolation: ${ISOLATION}
@@ -33,8 +38,13 @@ services:
       ACCEPT_EULA: "Y"
     volumes:
       - type: bind
-        source: .\glitteraudit\docker\data\sql
+        source: ${LOCAL_DATA_PATH}\sql
         target: C:\data
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4GB
 
   mssql-init:
     isolation: ${ISOLATION}
@@ -65,7 +75,7 @@ services:
       - "8984:8983"
     volumes:
       - type: bind
-        source: .\glitteraudit\docker\data\solr
+        source: ${LOCAL_DATA_PATH}\solr
         target: C:\data
     environment:
       SOLR_MODE: solrcloud
@@ -151,6 +161,11 @@ services:
         condition: service_healthy
       solr-init:
         condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4GB
 
   elasticsearch:
     labels:
@@ -176,8 +191,7 @@ services:
 
   glitterbucket:
     build:
-      target:
-        watch
+      target: watch
     environment:
       ElasticSearch__Uri: http://elasticsearch:9200
     labels:

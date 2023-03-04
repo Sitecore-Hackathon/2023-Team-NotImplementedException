@@ -1,5 +1,3 @@
-
-
 // Get item information from Sitecore
 function getCurrentItemInformation() {
     
@@ -89,7 +87,9 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
 
 // function to fetch data from the glitter API
 async function fetchApiData(itemId, itemLanguage, itemVersion) {
-    let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    let cleaneditemId = itemId.replace("{", "").replace("}", "");
+    let url = "https://glitterbucket.localhost/item/" + cleaneditemId + "/version/" + itemVersion;
+    let response = await fetch(url);
     let historydata = await response.json();
     return historydata[0].title;
 }

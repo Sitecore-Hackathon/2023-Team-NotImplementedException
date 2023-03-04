@@ -14,6 +14,8 @@ Best Enhancement to XM Cloud
 
 ## Description
 
+Glitter Audit
+
 ### Module Purpose
 
 **... TODO ...**
@@ -38,10 +40,24 @@ Best Enhancement to XM Cloud
 
 ## Installation instructions
 
+### Setup (once)
+
+1. Run `.\glitterxmc\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
 1. Run `dotnet tool restore`
-1. Run `.\glitteraudit\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
-1. Run `msbuild .\glitteraudit\ /t:"Restore;Build;WebPublish" /p:DeployOnBuild=true /p:PublishProfile=Local` or open Visual Studio solution and publish the `Platform` project.
-1. Run `.\Up.ps1`
+1. Run `dotnet sitecore cloud login`
+1. Run `dotnet sitecore connect --ref xmcloud --cm https://xmcloudcm.localhost --allow-write true -n default`
+
+### Startup
+
+1. Run `docker compose up -d --build`
+1. Run `dotnet sitecore index schema-populate`
+1. Run `dotnet sitecore ser push`
+1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore webhooks *only* initializes during startup OR item:save on a handler but NOT when pushing serialized items... \*sigh\*)
+1. Run `Start-Process https://xmcloudcm.localhost/sitecore/`
+
+### Shutdown
+
+1. Run `docker compose down`
 
 ### Configuration
 
@@ -54,5 +70,3 @@ Best Enhancement to XM Cloud
 ## Comments
 
 **... TODO ...**
-
-- Unfortunately Sitecore Webhooks *only* initializes during startup or item:save and NOT when pushing serialized items with `dotnet sitecore ser push`. As a workaround `.\Up.ps1` does a http call to `./glitteraudit/src/platform/layouts/InitializeWebhooks.aspx` that does the initialization.
