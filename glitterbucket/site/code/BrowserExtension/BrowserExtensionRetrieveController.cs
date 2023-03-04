@@ -25,28 +25,17 @@ namespace GlitterBucket.BrowserExtension
             return Ok(result);
         }
 
-        [HttpGet("item/{itemId}/version/{version}")]
-        public async Task<IActionResult> GetByItem(Guid itemId, int version)
+        [HttpGet("item/{itemId}/language/{language}/version/{version}")]
+        public async Task<IActionResult> GetByItem(Guid itemId, string language, int version)
         {
             var result = await _client.GetByItemId(itemId);
 
-            var mock = new[]
+            var data = result.Select(x => new ExtensionChangeModel
             {
-                new ExtensionChangeModel
-                {
-                    Timestamp = new DateTime(2022, 1, 1, 1, 1, 0),
-                    Username = @"sitecore\cni",
-                    FieldsText = "bla bla",
-                },
-                new ExtensionChangeModel
-                {
-                    Timestamp = DateTime.UtcNow,
-                    Username = @"sitecore\jba",
-                    FieldsText = "bla bla2",
-                }
-            };
-
-            return Ok(mock);
+                Timestamp = x.Timestamp,
+                Username = x.User,
+            }).ToArray();
+            return Ok(data);
         }
 
     }
