@@ -75,7 +75,7 @@ chrome.tabs.query({
                 updateExtensionInterface(result.itemId, result.itemLanguage, result.itemVersion);
             } else {
                 var historyElement = document.getElementById("history");
-                historyElement.innerHTML = "No item information found";
+                historyElement.innerHTML = "No item information found<br/><br/>Please open an item in the content editor, experience editor or pages editor.";
             }
         }
       });
