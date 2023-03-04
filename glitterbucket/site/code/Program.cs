@@ -1,6 +1,6 @@
+using GlitterBucket.BrowserExtension;
 using GlitterBucket.ElasticSearchStorage;
 using GlitterBucket.Receive;
-using GlitterBucket.Receive.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,7 @@ builder.Services.AddMvcCore();
 
 builder.AddElasticSearchStorage();
 builder.AddReceiveServices();
+builder.Services.AddCors(s => s.AddPolicy(BrowserExtensionRetrieveController.CorsPolicyName, p => p.AllowAnyOrigin().Build()));
 
 var app = builder.Build();
 
@@ -31,7 +32,5 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.MapControllers();
-
-app.UseCors(p => p.AllowAnyOrigin().Build());
 
 app.Run();

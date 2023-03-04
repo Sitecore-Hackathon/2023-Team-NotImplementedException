@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace GlitterBucket.BrowserExtension
 {
     [ApiController]
-    [EnableCors]
+    [EnableCors(PolicyName = CorsPolicyName)]
     public class BrowserExtensionRetrieveController : Controller
     {
+        public const string CorsPolicyName = "extension";
+
         private readonly IStorageClient _client;
 
         public BrowserExtensionRetrieveController(IStorageClient client)
