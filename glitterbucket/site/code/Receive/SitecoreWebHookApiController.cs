@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.Json;
-using GlitterBucket.Shared;
+﻿using System.Threading.Channels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlitterBucket.Receive
@@ -8,13 +6,13 @@ namespace GlitterBucket.Receive
     [ApiController]
     public class SitecoreWebHookApiController : Controller
     {
-        private readonly IStorageClient _client;
         private readonly ILogger<SitecoreWebHookApiController> _logger;
+        private readonly ChannelWriter<ReceivedWebhookData> _channel;
 
-        public SitecoreWebHookApiController(IStorageClient client, ILogger<SitecoreWebHookApiController> logger)
+        public SitecoreWebHookApiController(ILogger<SitecoreWebHookApiController> logger, ChannelWriter<ReceivedWebhookData> channel)
         {
-            _client = client;
             _logger = logger;
+            _channel = channel;
         }
 
         [HttpPost("hook/{id}")]
@@ -24,11 +22,11 @@ namespace GlitterBucket.Receive
             var raw = await reader.ReadToEndAsync();
             _logger.LogInformation("Received from {SitecoreId}", id);
 
-            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(raw));
-            var model = await JsonSerializer.DeserializeAsync<SitecoreWebHookModel>(stream);
-            _logger.LogInformation("Received {EventName} from {SitecoreId}: {Raw}", model?.EventName, id, raw);
-
-            await _client.Add(id, model, raw);
+            await _channel.WriteAsync(new ReceivedWebhookData
+            {
+                SitecoreInstanceId = id,
+                ReceivedData = raw
+            });
 
             return Ok();
         }
