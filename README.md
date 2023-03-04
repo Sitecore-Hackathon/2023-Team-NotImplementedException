@@ -20,6 +20,8 @@ Best Enhancement to XM Cloud
 
 Collects information on item, version and field changes to surface basic audit and historic information for Sitecore users *in context* of their current editor (ie. Content Editor, Experience Editor or Pages) using a browser extension. All data is stored in Elasticsearch and can be further queried and analyzed in great details.
 
+Purpose is also to show how to do integrations in Sitecore using webhooks, keeping functionality in a separate and isolated process.
+
 ### What problem was solved
 
 Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain needed information such as *field value changes*.
@@ -34,20 +36,28 @@ A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore
 
 **... TODO ...**
 
-## Pre-requisites and Dependencies
+## Pre-requisites and dependencies
 
 - Windows 10/11
 - Some Docker engine, for example [Docker Desktop](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
-- Visual Studio 2022
 
 ## Installation instructions
 
 ### Setup (once)
 
+#### Initialize solution
+
 1. Run `.\glitterxmc\Init.ps1 -LicenseXmlPath "<C:\path\to\license.xml>"`
 1. Run `dotnet tool restore`
 1. Run `dotnet sitecore cloud login`
 1. Run `dotnet sitecore connect --ref xmcloud --cm https://xmcloudcm.localhost --allow-write true -n default`
+
+#### Install browser extension
+
+1. In the address bar type `edge://extensions/` (Microsoft Edge) or `chrome://extensions/` on Google Chrome
+1. In the extension bar, enable `Developer Mode`
+1. Click `Load unpacked` and point to the folder `./glitterchromiumextension`
+1. Ensure the extension is visible by clicking the "Show in toolbar" in the extensions menu.
 
 ### Startup
 
@@ -55,19 +65,12 @@ A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore
 1. Run `dotnet sitecore index schema-populate`
 1. Run `dotnet sitecore ser push`
 1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore webhooks *only* initializes during startup OR item:save on a handler but NOT when pushing serialized items... \*sigh\*)
-1. Run `Start-Process https://xmcloudcm.localhost/sitecore/`
-
-### Shutdown
-
-1. Run `docker-compose down`
-
-### Configuration
-
-**... TODO ...**
 
 ## Usage instructions
 
-**... TODO ...**
+Open up <https://xmcloudcm.localhost/sitecore/> in Microsoft Edge or Google Chrome, create some new items, edit some, create new versions and click the extension to peek the data generated.
+
+**... TODO: write about linking to Kibana for advanced querying...**
 
 ## Comments
 
