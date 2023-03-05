@@ -34,7 +34,7 @@ A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore
 
 ## Video link
 
-DAMN!
+<https://www.youtube.com/watch?v=SLy9DFUh2H4>
 
 ## Pre-requisites and dependencies
 
