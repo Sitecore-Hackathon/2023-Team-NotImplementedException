@@ -62,7 +62,7 @@ namespace GlitterBucket.ElasticSearchStorage
         {
             var result = await _client.SearchAsync<IndexChangeModel>(s =>
                 s
-                    .Index(IndexPrefix + "*")
+                    .AllIndices()
                     .Query(q => q.Term(f => f.ItemId, itemId))
                     .Fields(fl => fl.Fields(f => f.Raw))
                     .Sort(o => o.Descending(f => f.Timestamp))
@@ -74,16 +74,16 @@ namespace GlitterBucket.ElasticSearchStorage
         {
             var result = await _client.SearchAsync<IndexChangeModel>(s =>
                 s
-                    .Index(IndexPrefix + "*")
-                    .Query(query =>  query.Bool(b => b.Filter(
-                            q => q.Term(f => f.ItemId, itemId),
-                            q => q.Term(f => f.Language, language),
-                            q => q.Term(f => f.Version, version)
-                            )))
-                    .Fields(fl => fl.Fields(f => f.Timestamp, f => f.User, f => f.FieldIds))
-                    .Sort(o => o.Descending(f => f.Timestamp))
+                    .AllIndices()
+                    //.Query(query => query.Bool(b => b.Filter(
+                            //q => q.Term(f => f.ItemId, itemId.ToString("D").ToLowerInvariant())
+                            //q => q.Term(f => f.Language, language),
+                            //q => q.Term(f => f.Version, version)
+                             //)))
+                    //.Fields(fl => fl.Fields(f => f.Timestamp, f => f.User, f => f.FieldIds))
+                    //.Sort(o => o.Descending(f => f.Timestamp))
             );
-            return result.Hits.Select(hit => hit.Source);
+            return result.Hits.Select(hit => hit.Source).Where(x => x.ItemId == itemId && x.Language == language && x.Version == version);
         }
 
         private static async Task<string?> Serialize<T>(T model)

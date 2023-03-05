@@ -6,3 +6,20 @@ Content-Type: application/json
         "match_all": {}
     }
 }
+
+
+#####
+POST https://elasticsearch.localhost/glitteraudit-*/_search
+Content-Type: application/json
+
+{
+    "query": {
+        "bool": {
+            "filter": [
+                { "term": { "language.keyword": "en"} },
+                { "term": { "itemId.keyword": "110d559f-dea5-42ea-9c1c-8a5df7e70ef9"} },
+                { "term": { "version": 1 } }
+            ]
+        }
+    }
+}
