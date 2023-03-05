@@ -81,11 +81,4 @@ Open up <https://xmcloudcm.localhost/sitecore/> in Microsoft Edge or Google Chro
 
 **... TODO: write about linking to Kibana for advanced querying...**
 
-Advanced:
-
-- Request raw Elasticsearch data: <https://elasticsearch.localhost/glitteraudit-*/_search>
-- Access Kibana: <https://kibana.localhost/>
-
-## Comments
-
-**... TODO ...**
+Advanced querying, goto Kibana at <https://kibana.localhost/>
