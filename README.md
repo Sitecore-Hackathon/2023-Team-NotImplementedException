@@ -66,11 +66,25 @@ A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore
 1. Run `dotnet sitecore ser push`
 1. Run `curl.exe -k https://xmcloudcm.localhost/layouts/InitializeWebhooks.aspx` (unfortunately Sitecore webhooks *only* initializes during startup OR item:save on a handler but NOT when pushing serialized items... \*sigh\*)
 
+## Configuration
+
+1. Open <https://kibana.localhost/app/management/kibana/dataViews>
+1. Click "Create data view"
+    - Name: "test"
+    - Index pattern: "glitteraudit-*"
+    - Timestamp field: "timestamp"
+1. Open <https://kibana.localhost/app/discover>
+
 ## Usage instructions
 
 Open up <https://xmcloudcm.localhost/sitecore/> in Microsoft Edge or Google Chrome, create some new items, edit some, create new versions and click the extension to peek the data generated.
 
 **... TODO: write about linking to Kibana for advanced querying...**
+
+Advanced:
+
+- Request raw Elasticsearch data: <https://elasticsearch.localhost/glitteraudit-*/_search>
+- Access Kibana: <https://kibana.localhost/>
 
 ## Comments
 
