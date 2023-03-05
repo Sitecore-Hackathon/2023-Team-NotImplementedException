@@ -17,32 +17,55 @@ function getCurrentItemInformation() {
 
     switch(editor) {
         case "experienceeditor":
+            
             var itemIdElement = document.getElementById("scItemID");
             var itemLanguageElement = document.getElementById("scLanguage");
             var itemVersionElement = document.getElementById("scVersion");
             
-            if (itemIdElement != null && itemLanguageElement != null && itemVersionElement != null) {
+            if (itemIdElement != null && itemLanguageElement != null) {
                 itemId = itemIdElement.value;
                 itemLanguage = itemLanguageElement.value; 
+            }
+
+            if (itemVersionElement != null) {
                 itemVersion = itemVersionElement.value;
             }
-            
+
             // if nothing was found, try to get the data from the querystring
-            if (itemId == null || itemLanguage == null || itemVersion == null) { 
-                let params = new URLSearchParams(window.location.search);
+            let params = new URLSearchParams(window.location.search);
+            
+            if (itemId == null) { 
                 itemId = params.get("sc_itemid");
+            }
+
+            if (itemLanguage == null) { 
                 itemLanguage = params.get("sc_lang");
+            }
+
+            if (itemVersion == null) { 
                 itemVersion = params.get("sc_version");
             }
-            
-            
+
+
             // if itemVersion was not found found, try to get the itemversion from the ribbon :S
             if (itemVersion == null) {
                 var element = document.getElementById('scWebEditRibbon').contentWindow.document.querySelectorAll('[data-sc-id="PageEditBar"]');
+                
                 if (element && element.length > 0) {
                     itemVersion = element[0].getAttribute("data-sc-version");
                 }
             }
+            
+                       
+            // fix guid format on itemid
+            if (itemId != null && itemId.indexOf("-") == -1) {
+                itemId = itemId.substring(0, 8) + "-" + itemId.substring(8, 12) + "-" + itemId.substring(12, 16) + "-" + itemId.substring(16, 20) + "-" + itemId.substring(20, 32);
+            }
+            
+            if (itemId != null) {
+                itemId = itemId.toLowerCase();
+            }
+            
 
             return {itemId, itemLanguage, itemVersion};
             
@@ -52,6 +75,10 @@ function getCurrentItemInformation() {
             itemId = itemInfo.substring(itemInfo.indexOf("{"), itemInfo.indexOf("}") + 1);
             itemLanguage = itemInfo.substring(itemInfo.indexOf("lang=") + 5, itemInfo.indexOf("&ver="));
             itemVersion = itemInfo.substring(itemInfo.indexOf("ver=") + 4);
+            if (itemId != null) {
+                itemId = itemId.toLowerCase();
+            }
+            
             return {itemId, itemLanguage, itemVersion}
     }
 
@@ -108,7 +135,7 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
 // function to fetch data from the glitter API
 async function fetchApiData(itemId, itemLanguage, itemVersion) {
 
-    let url = "https://glitterbucket.localhost/item/" + itemId + "/" + itemLanguage + "/version/" + itemVersion;
+    let url = "https://glitterbucket.localhost/item/" + itemId + "/language/" + itemLanguage + "/version/" + itemVersion;
     let response = await fetch(url);
     let historydata = await response.json();
     return historydata;
