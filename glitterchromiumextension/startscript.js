@@ -121,6 +121,7 @@ async function updateExtensionInterface(itemId, itemLanguage, itemVersion) {
     renderItemData(historyItemTableElement, "Item id", cleaneditemId);
     renderItemData(historyItemTableElement, "Item version", itemVersion);
     renderItemData(historyItemTableElement, "Item language", itemLanguage);
+    renderDetailsLink(historyItemTableElement, cleaneditemId);
 
     historyElement.appendChild(historyItemTableElement);
 
@@ -144,10 +145,10 @@ async function fetchApiData(itemId, itemLanguage, itemVersion) {
 
 function renderItemData(parentElement, itemDataName, itemData) {
     
-    var historyItemTableRowElement = document.createElement("tr");
-    var historyItemTableCellHeaderElement = document.createElement("td");
+    const historyItemTableRowElement = document.createElement("tr");
+    const historyItemTableCellHeaderElement = document.createElement("td");
     historyItemTableCellHeaderElement.className = "header";
-    var historyItemTableCellDataElement = document.createElement("td");
+    const historyItemTableCellDataElement = document.createElement("td");
     historyItemTableCellDataElement.className = "data";
     
     historyItemTableCellHeaderElement.innerHTML = itemDataName + ": ";
@@ -157,4 +158,16 @@ function renderItemData(parentElement, itemDataName, itemData) {
     historyItemTableRowElement.appendChild(historyItemTableCellDataElement);
 
     parentElement.appendChild(historyItemTableRowElement);
+}
+
+
+function renderDetailsLink(parentElement, itemId) {
+    const elm = document.createElement("a");
+    elm.className = "data";
+    elm.href =  "https://kibana.localhost/app/dashboards#/view/54bf36f0-bae8-11ed-84ae-dbf8c3238367?_a=(filters:!((query:(match_phrase:(itemId.keyword:'" + itemId + "')))))";
+    elm.innerHTML = "See details";
+    elm.target = '_blank';
+
+    parentElement.appendChild(elm);
+
 }
