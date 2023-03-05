@@ -79,6 +79,4 @@ A standard Sitecore 10.3 / XM Cloud [webhook event handler](https://doc.sitecore
 
 Open up <https://xmcloudcm.localhost/sitecore/> in Microsoft Edge or Google Chrome, create some new items, edit some, create new versions and click the extension to peek the data generated.
 
-**... TODO: write about linking to Kibana for advanced querying...**
-
-Advanced querying, goto Kibana at <https://kibana.localhost/>
+For advanced querying, open Kibana at <https://kibana.localhost/>
