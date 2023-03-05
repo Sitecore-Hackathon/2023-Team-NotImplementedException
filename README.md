@@ -20,11 +20,11 @@ Best Enhancement to XM Cloud
 
 Collects information on item, version and field changes to surface basic audit and historic information for Sitecore users *in context* of their current editor (ie. Content Editor, Experience Editor or Pages) using a browser extension. All data is stored in Elasticsearch and can be further queried and analyzed in great details.
 
-Purpose is also to show how to do integrations in Sitecore using webhooks, keeping functionality in a separate and isolated process.
+We also want to show how to do integrations in Sitecore using webhooks, keeping functionality in separate and isolated processes, perfect fit for XM Cloud but also a good approach for classic Sitecore 10.3 deployments.
 
 ### What problem was solved
 
-Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain needed information such as *field value changes*.
+Users of Sitecore often wants an easy way to see "what happened to an item" and the OOB audit log is not *easy* accessible to the common user and does not contain much needed information such as *field value changes*.
 
 ### How does this module solve it
 

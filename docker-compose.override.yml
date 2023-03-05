@@ -205,6 +205,8 @@ services:
       - "traefik.http.routers.grafana-secure.middlewares=force-STS-Header"
 
   glitterbucket:
+    environment:
+      ElasticSearch__Uri: http://elasticsearch:9200
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.force-STS-Header.headers.forceSTSHeader=true"

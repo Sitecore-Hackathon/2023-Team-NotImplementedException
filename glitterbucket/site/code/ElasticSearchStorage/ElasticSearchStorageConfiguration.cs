@@ -3,6 +3,6 @@
 
     public class ElasticSearchStorage
     {
-        public Uri Uri { get; set; }
+        public Uri? Uri { get; set; }
     }
 }

@@ -51,7 +51,11 @@ namespace GlitterBucket.ElasticSearchStorage
                 ChangedFields = changedFields,
                 User = userName,
             };
-            await _client.CreateAsync(fields, opt => opt.Index(indexName).Id(Guid.NewGuid()));
+            var response = await _client.CreateAsync(fields, opt => opt.Index(indexName).Id(Guid.NewGuid()));
+            if (!response.IsValid)
+            {
+                throw response.OriginalException;
+            }
         }
 
         public async Task<IEnumerable<IndexChangeModel>> GetByItemId(Guid itemId)
@@ -95,13 +99,21 @@ namespace GlitterBucket.ElasticSearchStorage
             return result;
         }
 
-        private Task EnsureIndex(string indexName)
+        private async Task EnsureIndex(string indexName)
         {
-            return _client.Indices.CreateAsync(indexName, s => s
+            var response = await _client.Indices.CreateAsync(indexName, s => s
                 .Settings(se => se
                     .NumberOfReplicas(1)
                 ).Map(m => m.AutoMap()));
 
+            if (!response.IsValid)
+            {
+                // Ignore if index already exists
+                if (response.ServerError?.Status != 400)
+                {
+                    throw response.OriginalException;
+                }
+            }
         }
 
 
